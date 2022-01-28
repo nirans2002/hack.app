@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "970758280495",
+    "project_id": "college-management-6bc0b",
+    "storage_bucket": "college-management-6bc0b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:970758280495:android:f4f4fedfa85bd3c4107dda",
+        "android_client_info": {
+          "package_name": "com.example.hack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "970758280495-lcqgbr72q379kv77tm83o4p4bd85ntbj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCa5Z_jNFQOrN-AIpiPgXD5E9NOX-NcKzE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "970758280495-lcqgbr72q379kv77tm83o4p4bd85ntbj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
