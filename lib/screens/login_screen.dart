@@ -9,9 +9,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreen extends State<LoginScreen> {
+  String dropdownvalue = 'Student';
+
   @override
   Widget build(BuildContext context) {
-    String dropdownvalue = 'Student';
     var items = [
       'Student',
       'Club',
@@ -48,10 +49,10 @@ class _LoginScreen extends State<LoginScreen> {
                         value: dropdownvalue,
                         icon: const Icon(Icons.keyboard_arrow_down),
                         onChanged: (String? newValue) {
-                          print(dropdownvalue);
                           setState(() {
                             dropdownvalue = newValue!;
                           });
+                          print(dropdownvalue);
                         },
                         items: items.map((String items) {
                           return DropdownMenuItem(
