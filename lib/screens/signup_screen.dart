@@ -1,16 +1,26 @@
 import 'dart:io';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({Key? key}) : super(key: key);
 
   @override
-  State createState() => _LoginScreen();
+  _SignupScreen createState() => _SignupScreen();
 }
 
-class _LoginScreen extends State<LoginScreen> {
+class _SignupScreen extends State<SignupScreen> {
+  // const LoginScreen({Key? key}) : super(key: key);
+
+  // bool _isvisible = true;
+  // @override
+  // void showToast() {
+  //   setState(() {
+  //     _isVisible = !_isVisible;
+  //   });
+  // }
   @override
   Widget build(BuildContext context) {
     String dropdownvalue = 'Student';
@@ -30,7 +40,7 @@ class _LoginScreen extends State<LoginScreen> {
               // Title
               const Center(
                 child: Text(
-                  'Login',
+                  'Sign Up',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 26,
@@ -42,7 +52,6 @@ class _LoginScreen extends State<LoginScreen> {
               Form(
                 child: Column(
                   children: <Widget>[
-                    // Dropdown
                     Padding(
                       padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                       child: DropdownButton(
@@ -63,6 +72,23 @@ class _LoginScreen extends State<LoginScreen> {
                         }).toList(),
                       ),
                     ),
+
+                    // Name
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                      child: TextFormField(
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Name',
+                        ),
+                        validator: (value) {
+                          if (value == null) {
+                            return "Please enter some value";
+                          }
+                        },
+                      ),
+                    ),
+
                     // Username
                     Padding(
                       padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
@@ -100,36 +126,13 @@ class _LoginScreen extends State<LoginScreen> {
                 ),
               ),
 
-              // Login button
+              // Signup button
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: ElevatedButton(
                   child: const Text(
-                    'Login',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/home');
-                  },
-                ),
-              ),
-              const Center(
-                child: Text(
-                  'OR',
-                  style: TextStyle(
-                    color: Colors.grey,
-                  ),
-                ),
-              ),
-
-              // Login with Google
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: ElevatedButton(
-                  child: const Text(
-                    'Login with Google',
+                    'SignUp',
                     style: TextStyle(fontSize: 16),
                   ),
                   onPressed: () {
@@ -138,22 +141,18 @@ class _LoginScreen extends State<LoginScreen> {
                 ),
               ),
 
-              // Signup option
+              // Back option
               Center(
                 child: RichText(
                   text: TextSpan(
                     children: [
-                      const TextSpan(
-                        text: 'Don\'t have an account? ',
-                        style: TextStyle(color: Colors.black, fontSize: 16),
-                      ),
                       TextSpan(
-                        text: 'Sign Up',
+                        text: 'Back',
                         style:
                             const TextStyle(color: Colors.blue, fontSize: 16),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            Navigator.pushNamed(context, '/signup');
+                            Navigator.pushNamed(context, '/login');
                           },
                       ),
                     ],
