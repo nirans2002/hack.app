@@ -1,5 +1,11 @@
-// ignore: constant_identifier_names
-const event_mock_data = [
+import 'dart:convert';
+
+import 'package:hack/database/mockdata/events_data_mock.dart';
+import 'package:hack/database/models/event_api_model.dart';
+import 'package:hack/screens/event_list_screen.dart';
+
+List<Event> dataList = [];
+final List data = [
   {
     "id": "1",
     "event_name": "Event 1",
@@ -14,7 +20,7 @@ const event_mock_data = [
     "updated_at": "2019-01-01",
     "is_free_event": "false",
     "registration_fee": "100",
-    "registration_link": "https://www.google.com",
+    "regstration_link": "https://www.google.com",
     "category": "Category 1",
     "event_image_url":
         "https://media.istockphoto.com/photos/large-group-of-business-people-in-convention-centre-picture-id1281724535?b=1&k=20&m=1281724535&s=170667a&w=0&h=RV0k68y2VPMDnP6QlW_7kErXhbLcqjYVgNmwc3kMMLo=",
@@ -32,7 +38,7 @@ const event_mock_data = [
   },
   {
     "id": "1",
-    "event_name": "Event s",
+    "event_name": "Event 1",
     "description": "Description 1",
     "start_date": "2019-01-01",
     "end_date": "2019-01-01",
@@ -44,7 +50,7 @@ const event_mock_data = [
     "updated_at": "2019-01-01",
     "is_free_event": "false",
     "registration_fee": "100",
-    "registration_link": "https://www.google.com",
+    "regstration_link": "https://www.google.com",
     "category": "Category 1",
     "event_image_url":
         "https://media.istockphoto.com/photos/large-group-of-business-people-in-convention-centre-picture-id1281724535?b=1&k=20&m=1281724535&s=170667a&w=0&h=RV0k68y2VPMDnP6QlW_7kErXhbLcqjYVgNmwc3kMMLo=",
@@ -61,3 +67,14 @@ const event_mock_data = [
     },
   },
 ];
+
+getEventData() {
+  // final data = jsonDecode(responseData.body);
+
+  // print(data);
+  for (Map<String, dynamic> i in data) {
+    dataList.add(Event.fromJson(i));
+  }
+  EventList = dataList;
+   isloading = false;
+}

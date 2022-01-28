@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hack/screens/event_list_screen.dart';
 import 'package:hack/screens/event_screen.dart';
 import 'package:hack/screens/login_screen.dart';
 import 'package:hack/screens/signup_screen.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const EventListScreen(),
+      home: const EventScreen(),
     );
   }
 }
