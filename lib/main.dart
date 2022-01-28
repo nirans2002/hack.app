@@ -18,12 +18,12 @@ class MyApp extends StatelessWidget {
       routes: {
         '/login': (context) => const LoginScreen(),
         '/signup': (context) => const SignupScreen(),
-        '/event_details': (context) => const EventDetailsScreen(),
+        '/event_details': (context) => const EventListScreen(),
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const EventDetailsScreen(),
+      home: const EventListScreen(),
     );
   }
 }
