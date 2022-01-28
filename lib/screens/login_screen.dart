@@ -9,10 +9,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreen extends State<LoginScreen> {
+  String dropdownvalue = 'Student';
+
   @override
   Widget build(BuildContext context) {
-    String dropdownvalue = 'Student';
-    var items = [
+    final List items = [
       'Student',
       'Club',
       'Admin',
@@ -44,22 +45,21 @@ class _LoginScreen extends State<LoginScreen> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                       child: DropdownButton(
-                        isExpanded: true,
-                        value: dropdownvalue,
-                        icon: const Icon(Icons.keyboard_arrow_down),
-                        onChanged: (String? newValue) {
-                          print(dropdownvalue);
-                          setState(() {
-                            dropdownvalue = newValue!;
-                          });
-                        },
-                        items: items.map((String items) {
-                          return DropdownMenuItem(
-                            value: items,
-                            child: Text(items),
-                          );
-                        }).toList(),
-                      ),
+                          isExpanded: true,
+                          value: dropdownvalue,
+                          icon: const Icon(Icons.keyboard_arrow_down),
+                          onChanged: (dynamic obj) {
+                            print(obj);
+                            setState(() {
+                              dropdownvalue = obj;
+                            });
+                          },
+                          items: items
+                              .map((e) => DropdownMenuItem(
+                                    child: Text(e),
+                                    value: e,
+                                  ))
+                              .toList()),
                     ),
                     // Username
                     Padding(
@@ -82,6 +82,7 @@ class _LoginScreen extends State<LoginScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16, vertical: 8),
                         child: TextFormField(
+                         
                           obscureText: true,
                           enableSuggestions: false,
                           decoration: const InputDecoration(
@@ -151,7 +152,7 @@ class _LoginScreen extends State<LoginScreen> {
                             const TextStyle(color: Colors.blue, fontSize: 16),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            Navigator.pushNamed(context, '/signup');
+                            Navigator.pushReplacementNamed(context, '/signup');
                           },
                       ),
                     ],
