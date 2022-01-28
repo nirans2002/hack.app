@@ -1,18 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hack/components/canteen_view.dart';
 import 'package:hack/models/food.dart';
 import 'package:hack/providers/canteen_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 
-class CanteenScreen extends StatelessWidget {
+class CanteenScreen extends StatefulWidget {
   CanteenScreen({Key? key}) : super(key: key);
 
+  @override
+  State<CanteenScreen> createState() => _CanteenScreenState();
+}
+
+class _CanteenScreenState extends State<CanteenScreen> {
   // final List items = [
-  //   'Veg',
-  //   'Non-Veg',
-  // ];
+  late var _razorpay;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _razorpay = Razorpay();
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+    super.initState();
+  }
+
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    // Do something when payment succeeds
+    print("Payment Done");
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    // Do something when payment fails
+    print("Payment Fail");
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    // Do something when an external wallet is selected
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +60,41 @@ class CanteenScreen extends StatelessWidget {
           ),
         ),
         elevation: 0,
-        actions: [],
+        actions: [
+          IconButton(
+            icon: Icon(Icons.notifications),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: Icon(Icons.person),
+            onPressed: () {},
+          ),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (value) {
+          print(value);
+        },
+        type: BottomNavigationBarType.fixed,
+        currentIndex: 0,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text("Home"),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.restaurant),
+            title: Text("Canteen"),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.event),
+            title: Text("Events"),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            title: Text("Settings"),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -131,12 +192,31 @@ class CanteenScreen extends StatelessWidget {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          hintText: '${data.getTotalPrice()}',
+                          hintText: 'Rs : ${data.getTotalPrice()}',
+                          hintStyle: GoogleFonts.poppins(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        int total = data.getTotalPrice();
+                        var options = {
+                          'key': "rzp_test_34L52B8zhFAGp7",
+                          // amount will be multiple of 100
+                          'amount': total.toString(), //So its pay 500
+                          'name': 'CANTEEN PAYMENT',
+                          'description': 'Demo',
+                          'timeout': 300, // in seconds
+                          'prefill': {
+                            'contact': '8921238239',
+                            'email': 'navneeth0112@gmail.com'
+                          }
+                        };
+                        _razorpay.open(options);
+                      },
                       child: Text(
                         "CheckOut",
                         style: titleStyle,
@@ -150,5 +230,12 @@ class CanteenScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _razorpay.clear();
+    super.dispose();
   }
 }
