@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:hack/providers/authenticationService.dart';
+import 'package:provider/provider.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -29,6 +31,7 @@ class _SignupScreen extends State<SignupScreen> {
       'Club',
       // 'Admin',
     ];
+    final auth = Provider.of<AuthenticationService>(context,listen: false);
 
     return Scaffold(
       body: Container(
@@ -60,7 +63,6 @@ class _SignupScreen extends State<SignupScreen> {
                         value: dropdownvalue,
                         icon: const Icon(Icons.keyboard_arrow_down),
                         onChanged: (String? newValue) {
-
                           setState(() {
                             dropdownvalue = newValue!;
                           });
@@ -155,7 +157,14 @@ class _SignupScreen extends State<SignupScreen> {
                           : _validateN = false;
                     });
                     if (!_validateU && !_validateP && !_validateN) {
-                      Navigator.pushNamed(context, '/home');
+                      auth
+                          .signUp(
+                              email: _textU.text,
+                              password: _textP.text,
+                              name: _textN.text)
+                          .then((value) {
+                        Navigator.pushNamed(context, '/home');
+                      });
                     }
                   },
                 ),
