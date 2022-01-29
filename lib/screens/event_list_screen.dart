@@ -4,6 +4,12 @@ import 'package:hack/database/methods/event_api.dart';
 import 'package:hack/database/models/event_api_model.dart';
 import 'package:hack/screens/event_screen.dart';
 
+//
+tapEvent(context, int index) {
+  debugPrint("tapEvent");
+}
+
+//
 class EventListScreen extends StatefulWidget {
   const EventListScreen({Key? key}) : super(key: key);
 
@@ -17,9 +23,6 @@ String imageUrl =
 String date = "01/02/2022";
 String eventDetails = "event details";
 String eventName = "Event name";
-void tapEvent() {
-  debugPrint("tap event go to details");
-}
 
 bool isloading = false;
 List<Event> eventList = [];
@@ -29,9 +32,8 @@ class _EventListScreenState extends State<EventListScreen> {
   initState() {
     super.initState();
     isloading = true;
-    for (Map<String, dynamic> i in data) {
-      eventList.add(Event.fromJson(i));
-    }
+    eventList = getEventData();
+
     isloading = false;
   }
 
@@ -39,7 +41,7 @@ class _EventListScreenState extends State<EventListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Event List'),
+        title: const Text('Events'),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -53,14 +55,18 @@ class _EventListScreenState extends State<EventListScreen> {
                     date: date,
                     eventDetails: eventList[index].eventDescription,
                     eventName: eventList[index].eventName,
-                    tapEvent: Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            EventScreen(eventIndex: index),
-                      ),
-                    ),
-                    // tapEvent: tapEvent,
+                  
+                    tapEvent: () {
+                      debugPrint("tap $index ");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EventScreen(
+                            event: eventList[index],
+                          ),
+                        ),
+                      );
+                    },
                     register: () {
                       debugPrint("register");
                     },

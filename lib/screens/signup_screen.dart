@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -59,7 +56,7 @@ class _SignupScreen extends State<SignupScreen> {
                         value: dropdownvalue,
                         icon: const Icon(Icons.keyboard_arrow_down),
                         onChanged: (String? newValue) {
-                          print(dropdownvalue);
+                          // print(dropdownvalue);
                           setState(() {
                             dropdownvalue = newValue!;
                           });

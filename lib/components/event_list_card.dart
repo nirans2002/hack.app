@@ -39,7 +39,7 @@ Padding eventListCard({
             eventDetails,
             style: const TextStyle(color: eventDesColor),
           ),
-          TextButton(onPressed: register, child: Text("Register Now"))
+          TextButton(onPressed: register, child: const Text("Register Now"))
         ],
       ),
       // isThreeLine: true,
