@@ -22,7 +22,9 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => CanteenProvider()),
-        ChangeNotifierProvider(create: (ctx)=>AuthenticationService(firebaseAuth: FirebaseAuth.instance)),
+        ChangeNotifierProvider(
+            create: (ctx) =>
+                AuthenticationService(firebaseAuth: FirebaseAuth.instance)),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -39,9 +41,8 @@ class MyApp extends StatelessWidget {
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.active) {
-         
                 if (snapshot.data == null) {
-                  return const SignupScreen();
+                  return const LoginScreen();
                 }
                 return const HomeScreen();
               } else {

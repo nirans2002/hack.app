@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hack/providers/authenticationService.dart';
+import 'package:provider/provider.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -8,6 +10,8 @@ class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final auth = Provider.of<AuthenticationService>(context, listen: false);
+
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: SettingsList(
@@ -36,7 +40,9 @@ class SettingsScreen extends StatelessWidget {
             SettingsTile(
               title: Text('Sign Out'),
               leading: Icon(Icons.logout_outlined),
-              onPressed: (BuildContext context) {},
+              onPressed: (BuildContext context) {
+                auth.signOut();
+              },
             ),
           ]),
           SettingsSection(
