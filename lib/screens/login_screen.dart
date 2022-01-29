@@ -14,6 +14,7 @@ class _LoginScreen extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final List items = [
+
       'Student',
       'Club',
       'Admin',
@@ -45,6 +46,7 @@ class _LoginScreen extends State<LoginScreen> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                       child: DropdownButton(
+
                           isExpanded: true,
                           value: dropdownvalue,
                           icon: const Icon(Icons.keyboard_arrow_down),
