@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:hack/providers/authenticationService.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -25,11 +27,11 @@ class _LoginScreen extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final List items = [
-
       'Student',
       'Club',
       'Admin',
     ];
+    final auth = Provider.of<AuthenticationService>(context, listen: false);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -48,7 +50,6 @@ class _LoginScreen extends State<LoginScreen> {
                   fontSize: 26,
                 ),
               ),
-
             ),
             // Form
             Form(
@@ -62,7 +63,7 @@ class _LoginScreen extends State<LoginScreen> {
                       isExpanded: true,
                       value: dropdownvalue,
                       icon: const Icon(Icons.keyboard_arrow_down),
-                       onChanged: ( newValue) {
+                      onChanged: (newValue) {
                         setState(() {
                           dropdownvalue = newValue.toString();
                         });
@@ -84,14 +85,12 @@ class _LoginScreen extends State<LoginScreen> {
                         border: const OutlineInputBorder(),
                         labelText: 'Username',
                         errorText: _validateU ? 'Username is required' : null,
-
                       ),
                       validator: (value) {
                         if (value == null) {
                           return "Please enter some value";
                         }
                       },
-
                     ),
                   ),
 
@@ -113,7 +112,6 @@ class _LoginScreen extends State<LoginScreen> {
                             return "Please enter some value";
                           }
                         },
-
                       )),
                 ],
               ),
@@ -172,7 +170,11 @@ class _LoginScreen extends State<LoginScreen> {
                         : _validateP = false;
                   });
                   if (!_validateU && !_validateP) {
-                    Navigator.pushNamed(context, '/home');
+                    auth
+                        .login(email: _textU.text, password: _textP.text)
+                        .then((value) {
+                      Navigator.pushNamed(context, '/home');
+                    });
                   }
                 },
               ),
