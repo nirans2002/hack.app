@@ -17,8 +17,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => CanteenProvider()),
@@ -29,12 +27,12 @@ class MyApp extends StatelessWidget {
         routes: {
           '/login': (context) => const LoginScreen(),
           '/signup': (context) => const SignupScreen(),
+          '/home': (context) => const HomeScreen(),
         },
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: HomeScreen(),
-
+        home: LoginScreen(),
       ),
     );
   }

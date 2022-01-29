@@ -15,6 +15,7 @@ class _LoginScreen extends State<LoginScreen> {
   final _textP = TextEditingController();
   bool _validateU = false;
   bool _validateP = false;
+
   void dispose() {
     _textU.dispose();
     _textP.dispose();
@@ -61,12 +62,12 @@ class _LoginScreen extends State<LoginScreen> {
                       isExpanded: true,
                       value: dropdownvalue,
                       icon: const Icon(Icons.keyboard_arrow_down),
-                      onChanged: (String? newValue) {
+                       onChanged: ( newValue) {
                         setState(() {
-                          dropdownvalue = newValue!;
+                          dropdownvalue = newValue.toString();
                         });
                       },
-                      items: items.map((String items) {
+                      items: items.map((dynamic items) {
                         return DropdownMenuItem(
                           value: items,
                           child: Text(items),
