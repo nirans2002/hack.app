@@ -1,10 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
-
 import 'package:hack/providers/authenticationService.dart';
 import 'package:provider/provider.dart';
-
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -161,7 +158,12 @@ class _LoginScreen extends State<LoginScreen> {
                                   : _validateP = false;
                             });
                             if (!_validateU && !_validateP) {
-                              Navigator.pushNamed(context, '/home');
+                              auth
+                                  .login(
+                                      email: _textU.text, password: _textP.text)
+                                  .then((value) {
+                                Navigator.pushNamed(context, '/home');
+                              });
                             }
                           },
                         ),
@@ -177,8 +179,6 @@ class _LoginScreen extends State<LoginScreen> {
                           ),
                         ),
                       ),
-
-
                     // Login with Google
                     Padding(
                       padding: const EdgeInsets.symmetric(
@@ -191,84 +191,6 @@ class _LoginScreen extends State<LoginScreen> {
                         onPressed: () {
                           Null;
                         },
-                      )),
-                ],
-              ),
-            ),
-
-            // Login button
-            if (dropdownvalue != 'Admin')
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: ElevatedButton(
-                  child: const Text(
-                    'Login',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      _textU.text.isEmpty
-                          ? _validateU = true
-                          : _validateU = false;
-                      _textP.text.isEmpty
-                          ? _validateP = true
-                          : _validateP = false;
-                    });
-                    if (!_validateU && !_validateP) {
-                      Navigator.pushNamed(context, '/home');
-                    }
-                  },
-                ),
-              ),
-            if (dropdownvalue != 'Admin')
-              const Center(
-                child: Text(
-                  'OR',
-                  style: TextStyle(
-                    color: Colors.grey,
-                  ),
-                ),
-              ),
-
-            // Login with Google
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: ElevatedButton(
-                child: const Text(
-                  'Login with Google',
-                  style: TextStyle(fontSize: 16),
-                ),
-                onPressed: () {
-                  setState(() {
-                    _textU.text.isEmpty
-                        ? _validateU = true
-                        : _validateU = false;
-                    _textP.text.isEmpty
-                        ? _validateP = true
-                        : _validateP = false;
-                  });
-                  if (!_validateU && !_validateP) {
-                    auth
-                        .login(email: _textU.text, password: _textP.text)
-                        .then((value) {
-                      Navigator.pushNamed(context, '/home');
-                    });
-                  }
-                },
-              ),
-            ),
-
-            // Signup option
-            if (dropdownvalue != 'Admin')
-              Center(
-                child: RichText(
-                  text: TextSpan(
-                    children: [
-                      const TextSpan(
-                        text: 'Don\'t have an account? ',
-                        style: TextStyle(color: Colors.black, fontSize: 16),
-
                       ),
                     ),
 

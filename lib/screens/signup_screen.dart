@@ -1,9 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:hack/providers/authenticationService.dart';
 import 'package:provider/provider.dart';
-
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -41,10 +39,7 @@ class _SignupScreen extends State<SignupScreen> {
       'College of Engineering, Trivandrum',
       'Other',
     ];
-    var colleges = [
-      'College of Engineering, Trivandrum',
-      'Other',
-    ];
+
     final auth = Provider.of<AuthenticationService>(context, listen: false);
 
     return Scaffold(
@@ -267,7 +262,6 @@ class _SignupScreen extends State<SignupScreen> {
               ],
             )),
       ),
-
     );
   }
 }
