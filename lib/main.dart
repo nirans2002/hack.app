@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hack/providers/authenticationService.dart';
 import 'package:hack/providers/canteen_provider.dart';
+import 'package:hack/screens/event_list_screen.dart';
 import 'package:hack/screens/home_screen.dart';
 import 'package:hack/screens/login_screen.dart';
 import 'package:hack/screens/signup_screen.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
             '/login': (context) => const LoginScreen(),
             '/signup': (context) => const SignupScreen(),
             '/home': (context) => const HomeScreen(),
+            '/events': (context) => const EventListScreen(),
           },
           theme: ThemeData(
             primarySwatch: Colors.blue,
