@@ -5,18 +5,25 @@ import 'package:hack/screens/canteen.dart';
 import 'package:hack/screens/home_screen.dart';
 
 import 'package:hack/screens/login_screen.dart';
+import 'package:hack/screens/lost_found_screen.dart';
 import 'package:hack/screens/signup_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+  
 
   @override
   Widget build(BuildContext context) {
+    
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => CanteenProvider()),
@@ -32,8 +39,10 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: LoginScreen(),
+        home: LostAndFound(),
       ),
     );
   }
 }
+
+class FirebaseApp {}
