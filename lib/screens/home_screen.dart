@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hack/screens/canteen.dart';
 import 'package:hack/screens/main_screen.dart';
+import 'package:hack/screens/settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,6 +15,14 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> widget_list = [
     MainScreen(),
     const CanteenScreen(),
+    SettingsScreen(),
+  ];
+  final List<String> title_name = [
+    "Home",
+    "Canteen",
+    "Events",
+    "Orders",
+    "Settings",
   ];
   int selectedIndex = 0;
   @override
@@ -26,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Canteen",
+          title_name[selectedIndex],
           style: GoogleFonts.poppins(
             fontSize: size.width * 0.056,
             fontWeight: FontWeight.w600,
@@ -63,8 +72,8 @@ class _HomeScreenState extends State<HomeScreen> {
             title: Text("Canteen"),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.event),
-            title: Text("Events"),
+            icon: Icon(Icons.bookmark),
+            title: Text("Wishlist"),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.replay_outlined),
