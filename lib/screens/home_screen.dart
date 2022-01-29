@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hack/screens/canteen.dart';
 import 'package:hack/screens/main_screen.dart';
+import 'package:hack/screens/recent_screen.dart';
 import 'package:hack/screens/settings_screen.dart';
+import 'package:hack/screens/wish_list.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,12 +17,14 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> widget_list = [
     MainScreen(),
     const CanteenScreen(),
+    WishList(),
+    RecentScreen(),
     SettingsScreen(),
   ];
   final List<String> title_name = [
     "Home",
     "Canteen",
-    "Events",
+    "WishList",
     "Orders",
     "Settings",
   ];
