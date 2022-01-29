@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:hack/providers/canteen_provider.dart';
 import 'package:hack/screens/canteen.dart';
 import 'package:hack/screens/home_screen.dart';
+
 import 'package:hack/screens/login_screen.dart';
 import 'package:hack/screens/signup_screen.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +17,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
 
     return MultiProvider(
       providers: [

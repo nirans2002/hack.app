@@ -47,6 +47,7 @@ class _LoginScreen extends State<LoginScreen> {
                   fontSize: 26,
                 ),
               ),
+
             ),
             // Form
             Form(
@@ -82,6 +83,7 @@ class _LoginScreen extends State<LoginScreen> {
                         border: const OutlineInputBorder(),
                         labelText: 'Username',
                         errorText: _validateU ? 'Username is required' : null,
+
                       ),
                       validator: (value) {
                         if (value == null) {
