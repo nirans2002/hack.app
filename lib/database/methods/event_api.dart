@@ -75,6 +75,6 @@ getEventData() {
   for (Map<String, dynamic> i in data) {
     dataList.add(Event.fromJson(i));
   }
-  EventList = dataList;
+  eventList = dataList;
    isloading = false;
 }

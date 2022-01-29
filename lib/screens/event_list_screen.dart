@@ -1,9 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hack/components/event_list_card.dart';
 import 'package:hack/database/methods/event_api.dart';
 import 'package:hack/database/models/event_api_model.dart';
-import 'package:hack/database/theme/colors.dart';
+import 'package:hack/screens/event_screen.dart';
 
 class EventListScreen extends StatefulWidget {
   const EventListScreen({Key? key}) : super(key: key);
@@ -23,14 +22,17 @@ void tapEvent() {
 }
 
 bool isloading = false;
-List<Event> EventList = [];
+List<Event> eventList = [];
 
 class _EventListScreenState extends State<EventListScreen> {
   @override
   initState() {
     super.initState();
     isloading = true;
-    getEventData();
+    for (Map<String, dynamic> i in data) {
+      eventList.add(Event.fromJson(i));
+    }
+    isloading = false;
   }
 
   @override
@@ -44,14 +46,21 @@ class _EventListScreenState extends State<EventListScreen> {
         child: isloading
             ? const Center(child: CircularProgressIndicator())
             : ListView.builder(
-                itemCount: EventList.length,
+                itemCount: eventList.length,
                 itemBuilder: (BuildContext context, int index) {
                   return eventListCard(
                     imageUrl: imageUrl,
                     date: date,
-                    eventDetails: EventList[index].eventDescription,
-                    eventName: EventList[index].eventName,
-                    tapEvent: tapEvent,
+                    eventDetails: eventList[index].eventDescription,
+                    eventName: eventList[index].eventName,
+                    tapEvent: Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            EventScreen(eventIndex: index),
+                      ),
+                    ),
+                    // tapEvent: tapEvent,
                     register: () {
                       debugPrint("register");
                     },
