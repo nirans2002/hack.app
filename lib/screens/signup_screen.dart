@@ -1,7 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:hack/providers/authenticationService.dart';
 import 'package:provider/provider.dart';
+
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -19,18 +21,25 @@ class _SignupScreen extends State<SignupScreen> {
   bool _validateU = false;
   final _textP = TextEditingController();
   bool _validateP = false;
+  final _textPh = TextEditingController();
+  bool _validatePh = false;
   void dispose() {
     _textU.dispose();
     _textP.dispose();
     super.dispose();
   }
 
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     var items = [
       'Student',
       'Club',
-      // 'Admin',
+    ];
+    var colleges = [
+      'College of Engineering, Trivandrum',
+      'Other',
     ];
     var colleges = [
       'College of Engineering, Trivandrum',
@@ -258,6 +267,7 @@ class _SignupScreen extends State<SignupScreen> {
               ],
             )),
       ),
+
     );
   }
 }
