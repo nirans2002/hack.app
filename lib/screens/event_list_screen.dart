@@ -17,14 +17,7 @@ class EventListScreen extends StatefulWidget {
   _EventListScreenState createState() => _EventListScreenState();
 }
 
-//data
-String imageUrl =
-    "https://media.istockphoto.com/photos/large-group-of-business-people-in-convention-centre-picture-id1281724535?b=1&k=20&m=1281724535&s=170667a&w=0&h=RV0k68y2VPMDnP6QlW_7kErXhbLcqjYVgNmwc3kMMLo=";
-String date = "01/02/2022";
-String eventDetails = "event details";
-String eventName = "Event name";
-
-bool isloading = false;
+bool isloading = true;
 List<Event> eventList = [];
 
 class _EventListScreenState extends State<EventListScreen> {
@@ -38,6 +31,7 @@ class _EventListScreenState extends State<EventListScreen> {
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -47,30 +41,56 @@ class _EventListScreenState extends State<EventListScreen> {
       body: SafeArea(
         child: isloading
             ? const Center(child: CircularProgressIndicator())
-            : ListView.builder(
-                itemCount: eventList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return eventListCard(
-                    imageUrl: imageUrl,
-                    date: date,
-                    eventDetails: eventList[index].eventDescription,
-                    eventName: eventList[index].eventName,
-                    tapEvent: () {
-                      debugPrint("tap $index ");
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EventScreen(
-                            event: eventList[index],
-                          ),
-                        ),
-                      );
-                    },
-                    register: () {
-                      launchURLBrowser(eventList[index].registrationLink);
-                    },
-                  );
+            : RefreshIndicator(
+                onRefresh: () {
+                  return Future.delayed(Duration(seconds: 1), () {
+                    setState(() {
+                      eventList = getEventData();
+                    });
+                  });
                 },
+                child: ListView.builder(
+                  itemCount: eventList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    bool isFav = checkFavEvent(eventList[index].id);
+                    return eventListCard(
+                      eventId: eventList[index].id,
+                      imageUrl: eventList[index].eventImageUrl,
+                      date:
+                          "${eventList[index].eventStartDate} - ${eventList[index].eventEndDate}",
+                      eventDetails: eventList[index].eventDescription,
+                      eventName: eventList[index].eventName,
+                      tapEvent: () {
+                        debugPrint("tap $index ");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EventScreen(
+                              event: eventList[index],
+                            ),
+                          ),
+                        );
+                      },
+                      register: () {
+                        launchURLBrowser(eventList[index].registrationLink);
+                      },
+                      favicon: GestureDetector(
+                        child: isFav
+                            ? const Icon(Icons.favorite, color: Colors.pink)
+                            : const Icon(Icons.favorite_border_sharp),
+                        onTap: () {
+                          isFav
+                              ? userFavEventIdList.remove(eventList[index].id)
+                              : userFavEventIdList.add(eventList[index].id);
+                          setState(() {
+                            isFav = !isFav;
+                          });
+                        },
+                      ),
+                    );
+                  },
+                  physics: const AlwaysScrollableScrollPhysics(),
+                ),
               ),
       ),
     );

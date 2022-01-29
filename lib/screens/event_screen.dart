@@ -4,7 +4,7 @@ import 'package:hack/database/methods/event_api.dart';
 import 'package:hack/database/models/event_api_model.dart';
 import 'package:hack/database/theme/colors.dart';
 
-class EventScreen extends StatelessWidget {
+class EventScreen extends StatefulWidget {
   const EventScreen({
     Key? key,
     required this.event,
@@ -13,8 +13,15 @@ class EventScreen extends StatelessWidget {
   final Event event;
 
   @override
+  State<EventScreen> createState() => _EventScreenState();
+}
+
+class _EventScreenState extends State<EventScreen> {
+  @override
   Widget build(BuildContext context) {
     // final List<Event> events = getEventData();
+    bool isFav = checkFavEvent(widget.event.id);
+    // bool isFav = false;
 
     return Scaffold(
         appBar: AppBar(
@@ -30,7 +37,7 @@ class EventScreen extends StatelessWidget {
             ),
             onPressed: () {
               //TODO: add call fn to register
-              launchURLBrowser(event.registrationLink);
+              launchURLBrowser(widget.event.registrationLink);
             },
           ),
         ),
@@ -43,7 +50,7 @@ class EventScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     CachedNetworkImage(
-                      imageUrl: event.eventImageUrl,
+                      imageUrl: widget.event.eventImageUrl,
                       progressIndicatorBuilder:
                           (context, url, downloadProgress) =>
                               CircularProgressIndicator(
@@ -51,26 +58,51 @@ class EventScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        event.eventName,
-                        style: const TextStyle(
-                            fontSize: 25, fontWeight: FontWeight.bold),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Spacer(flex: 1),
+                          Text(
+                            widget.event.eventName,
+                            style: const TextStyle(
+                                fontSize: 25, fontWeight: FontWeight.bold),
+                          ),
+                          const Spacer(flex: 1),
+                          Positioned(
+                            right: 0,
+                            child: GestureDetector(
+                              child: isFav
+                                  ? const Icon(Icons.favorite,
+                                      color: Colors.pink)
+                                  : const Icon(Icons.favorite_border_sharp),
+                              onTap: () {
+                                isFav
+                                    ? userFavEventIdList.remove(widget.event.id)
+                                    : userFavEventIdList.add(widget.event.id);
+                                setState(() {
+                                  // isFav = !isFav;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     Column(
                       children: [
-                        Text(event.registrationLink.toString()),
-                        details_list("Hosted by:", event.host.hostName),
-                        details_list("Venue:", event.eventVenue),
+                        details_list("Hosted by:", widget.event.host.hostName),
+                        details_list("Venue:", widget.event.eventVenue),
                         details_list("Date:", "test"),
                         details_list("Date:",
-                            "${event.eventStartDate} - ${event.eventEndDate}"),
+                            "${widget.event.eventStartDate} - ${widget.event.eventEndDate}"),
                         details_list(
-                            "Registeration Fee:", event.registrationFee),
+                            "Registeration Fee:", widget.event.registrationFee),
                         details_list(
-                            "Registration Link:", event.registrationLink),
+                            "Registration Link:", widget.event.registrationLink,
+                            isLink: true, url: widget.event.registrationLink),
                         details_list("Contact:",
-                            "${event.contact.contactName} : ${event.contact.contactPhone}"),
+                            "${widget.event.contact.contactName} : ${widget.event.contact.contactPhone}"),
                       ],
                     )
                   ],
@@ -80,19 +112,24 @@ class EventScreen extends StatelessWidget {
   }
 
   // ignore: non_constant_identifier_names
-  ListTile details_list(String title, value, {bool isLink = false}) {
+  ListTile details_list(String title, value, {bool isLink = false, url}) {
     return ListTile(
       title: Text(title,
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
       subtitle: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: isLink
-            ? value
-            : Text(
-                value,
-                style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
+        child: GestureDetector(
+          child: Text(
+            value,
+            style: const TextStyle(
+                fontSize: 18, color: Colors.grey, fontWeight: FontWeight.w500),
+          ),
+          onTap: isLink
+              ? () {
+                  launchURLBrowser(url);
+                }
+              : null,
+        ),
       ),
     );
   }

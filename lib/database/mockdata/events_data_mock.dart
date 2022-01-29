@@ -31,7 +31,7 @@ List event_mock_data = [
     },
   },
   {
-    "id": "1",
+    "id": "2",
     "event_name": "Event 2",
     "description": "Description 2",
     "start_date": "2019-01-01",
@@ -61,7 +61,7 @@ List event_mock_data = [
     },
   },
   {
-    "id": "1",
+    "id": "3",
     "event_name": "Event 3",
     "description": "Description 3",
     "start_date": "2019-01-01",
@@ -91,7 +91,7 @@ List event_mock_data = [
     },
   },
   {
-    "id": "1",
+    "id": "4",
     "event_name": "Event 4",
     "description": "Description 4",
     "start_date": "2019-01-01",
@@ -121,7 +121,7 @@ List event_mock_data = [
     },
   },
   {
-    "id": "1",
+    "id": "5",
     "event_name": "Event 5",
     "description": "Description 4",
     "start_date": "2019-01-01",
