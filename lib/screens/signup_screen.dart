@@ -212,7 +212,7 @@ class _SignupScreen extends State<SignupScreen> {
                             const TextStyle(color: Colors.blue, fontSize: 16),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            Navigator.pushNamed(context, '/login');
+                            Navigator.pushReplacementNamed(context, '/login');
                           },
                       ),
                     ],

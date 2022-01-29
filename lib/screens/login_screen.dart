@@ -23,7 +23,8 @@ class _LoginScreen extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var items = [
+    final List items = [
+
       'Student',
       'Club',
       'Admin',
@@ -47,7 +48,6 @@ class _LoginScreen extends State<LoginScreen> {
                 ),
               ),
             ),
-
             // Form
             Form(
               child: Column(
@@ -88,6 +88,7 @@ class _LoginScreen extends State<LoginScreen> {
                           return "Please enter some value";
                         }
                       },
+
                     ),
                   ),
 
@@ -109,6 +110,7 @@ class _LoginScreen extends State<LoginScreen> {
                             return "Please enter some value";
                           }
                         },
+
                       )),
                 ],
               ),
@@ -189,7 +191,7 @@ class _LoginScreen extends State<LoginScreen> {
                             const TextStyle(color: Colors.blue, fontSize: 16),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            Navigator.pushNamed(context, '/signup');
+                            Navigator.pushReplacementNamed(context, '/signup');
                           },
                       ),
                     ],
