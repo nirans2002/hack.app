@@ -42,7 +42,6 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
         ),
-        
         Container(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -52,10 +51,11 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
         ),
-        // Icon(
-        //   Icons.,
-        //   color: Colors.grey,
-        // ),
+        const Icon(
+          Icons.more_horiz,
+          size: 40,
+          color: Colors.grey,
+        ),
         Expanded(
           child: grid(itemWidth, itemHeight, context),
         )
