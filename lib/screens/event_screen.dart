@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:hack/database/methods/event_api.dart';
 import 'package:hack/database/models/event_api_model.dart';
 import 'package:hack/database/theme/colors.dart';
 
@@ -29,6 +30,7 @@ class EventScreen extends StatelessWidget {
             ),
             onPressed: () {
               //TODO: add call fn to register
+              launchURLBrowser(event.registrationLink);
             },
           ),
         ),

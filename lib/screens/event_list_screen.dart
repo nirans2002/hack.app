@@ -55,7 +55,6 @@ class _EventListScreenState extends State<EventListScreen> {
                     date: date,
                     eventDetails: eventList[index].eventDescription,
                     eventName: eventList[index].eventName,
-                  
                     tapEvent: () {
                       debugPrint("tap $index ");
                       Navigator.push(
@@ -68,7 +67,7 @@ class _EventListScreenState extends State<EventListScreen> {
                       );
                     },
                     register: () {
-                      debugPrint("register");
+                      launchURLBrowser(eventList[index].registrationLink);
                     },
                   );
                 },

@@ -1,7 +1,7 @@
 import 'package:hack/database/mockdata/events_data_mock.dart';
 import 'package:hack/database/models/event_api_model.dart';
 import 'package:hack/screens/event_list_screen.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 List<Event> dataList = [];
 final List data = event_mock_data;
 
@@ -15,3 +15,16 @@ getEventData() {
   isloading = false;
   return dataList;
 }
+
+
+// launchurl
+
+launchURLBrowser(String url) async{
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+
+}
+
