@@ -154,6 +154,8 @@ class _CanteenScreenState extends State<CanteenScreen> {
                         }
                       };
                       _razorpay.open(options);
+
+                      data.addOrder(total);
                     },
                     child: Text(
                       "CheckOut",
@@ -171,7 +173,6 @@ class _CanteenScreenState extends State<CanteenScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _razorpay.clear();
     super.dispose();
   }
