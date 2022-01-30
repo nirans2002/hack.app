@@ -9,7 +9,7 @@ List event_mock_data = [
     "days": "1",
     "start_time": "10:00",
     "end_time": "11:00",
-    "venue": "Location 1",
+    "venue": "venue",
     "created_at": "2019-01-01",
     "updated_at": "2019-01-01",
     "is_free_event": "false",
