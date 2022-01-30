@@ -6,7 +6,6 @@ import 'package:hack/database/mockdata/userFavEvent.dart';
 import 'package:hack/database/models/event_api_model.dart';
 import 'package:hack/database/theme/colors.dart';
 import 'package:hack/screens/event_screen.dart';
-import 'package:marquee/marquee.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
