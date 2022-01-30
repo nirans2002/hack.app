@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hack/models/food.dart';
 
@@ -105,5 +107,26 @@ class CanteenProvider with ChangeNotifier {
   void notifyTime(String t) {
     time = t;
     notifyListeners();
+  }
+
+  //add order to firebase
+  void addOrder(int amount) async {
+    //add order to firebase
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+    await _firestore
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .set({
+      "userorders": FieldValue.arrayUnion([
+        {
+          "amount": amount,
+          "cart": cartItems,
+          "time": time,
+        }
+      ])
+    }).then((value) {
+      cartItems.clear();
+      notifyListeners();
+    });
   }
 }
